@@ -6,25 +6,21 @@ class Customer {
     this.totalSpent = 0;
   }
 
-  getRoomBookings(bookingsData) {
-    const findBookings = bookingsData.filter((booking) => {
-      return booking.userID === this.id;
+  getRoomBookings(bookingsRepo) {
+    const findBookings = bookingsRepo.filter((booking) => {
+      return booking.userId === this.id;
     })
 
-    this.roomBookings = findBookings
+    this.roomBookings = findBookings;
   }
 
-  getTotalSpent(roomRepo) {
+  getTotalSpent() {
     const calculateTotalSpent = this.roomBookings.reduce((total, booking) => {
-      roomRepo.forEach((room) => {
-        if (room.number === booking.roomNumber) {
-          total += room.costPerNight
-        }
-      })
-      return total
+      total += booking.costPerNight;
+      return total;
     }, 0)
 
-    this.totalSpent = calculateTotalSpent
+    this.totalSpent = calculateTotalSpent;
   }
 }
 

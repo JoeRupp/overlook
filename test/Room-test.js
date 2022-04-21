@@ -4,6 +4,7 @@ import Room from "../src/classes/Room";
 describe('Room Tests', function() {
   let room;
   let roomData;
+  let bookingsData;
 
   beforeEach(() => {
     roomData = {
@@ -15,7 +16,14 @@ describe('Room Tests', function() {
       costPerNight: 358.4
       }
 
-    room = new Room(roomData);
+    bookingsData = {
+      id: "5fwrgu4i7k55hl6sz",
+      userID: 1,
+      date: "2022/04/22",
+      roomNumber: 1
+      }
+
+    room = new Room(roomData, bookingsData);
   })
 
   it("Should be a function", () => {
@@ -48,5 +56,17 @@ describe('Room Tests', function() {
 
   it("Should have a cost per night", () => {
     expect(room.costPerNight).to.be.equal(358.4);
+  });
+
+  it("Should have a booking id", () => {
+    expect(room.bookingId).to.be.equal("5fwrgu4i7k55hl6sz");
+  });
+
+  it("Should have a user id", () => {
+    expect(room.userId).to.be.equal(1);
+  });
+
+  it("Should have a booking date", () => {
+    expect(room.bookingDate).to.be.equal("2022/04/22");
   });
 });
