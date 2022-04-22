@@ -1,7 +1,4 @@
 // GET
-
-let fetchedData;
-
 const fetchData = (extension) => {
   return fetch(`http://localhost:3001/api/v1/${extension}`)
     .then((response) => {
@@ -19,33 +16,34 @@ const fetchAllData = () => {
     fetchData("customers"),
     fetchData("rooms"),
     fetchData("bookings"),
-  ]).then((data) => {
-    fetchedData = data;
-    console.log(fetchedData)
-  });
+  ])
 }
 
-fetchAllData ()
-
 // POST
-// const postData = (data) => {
-//   return fetch(`http://localhost:3001/api/v1/users`, {
-//       method: "POST",
-//       body: JSON.stringify(data),
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     })
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       } else {
-//         throw Error(response.statusText)
-//       }
-//     })
-//     .catch(err => console.log(err))
-// };
+
+const postData = (data) => {
+  return fetch(`http://localhost:3001/api/v1/bookings`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch(err => console.log(err))
+};
 
 // DELETE
+const deleteData = (data) => {
 
-export default fetchedData ;
+}
+
+export { fetchAllData };
+export { postData };
+export { deleteData };
