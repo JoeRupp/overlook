@@ -3,7 +3,7 @@ import { fetchAllData } from './apiCalls';
 import BookingsRepo from '../src/classes/BookingsRepo';
 import CustomerRepo from '../src/classes/CustomerRepo';
 import './css/styles.css';
-import './images/OverLook-icon-03.png'
+import './images/overlook-icon-03.png'
 // import './images/OverLook_Logo-antler.svg';
 
 // GLOBAL VARIABLES

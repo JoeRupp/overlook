@@ -6,12 +6,120 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OverLook Hotel</title>
-  <link rel="icon" href="./images/OverLook-icon-03.png" />
+  <link rel="icon" typw="image" href="./images/overlook-icon-03.png"/>
 </head>
 
 <body>
-  
-  
+  <nav>
+    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 522.21 297.76"><defs><style>.cls-1{fill:#f9f9fa;}</style></defs><path class="cls-1" d="M436,250s-10.9-19.77-38.57-16.59-93.31-20.85-113.73-31.81S234.36,170,199.4,178s-66.12,12.44-88.29,39.51S77,248.53,64,251.43s-31.57,2.83-42.62-19.52c0,0,28,22.91,56-1.39s38.84-39.4,34-43.63-36.58,6.85-47.68-1.66c0,0,31.12-3.31,35.1-15.22,1.92-5.78-21.37-27.31-27.48-32.12S35.51,90.23,35.23,79.71c0,0,39.11,43,50.16,53.77s45.84,42.23,70.53,36.38,31.89-6.14,31.89-6.14,22.52-2.65,13.45-24.22c-6.73-16-46.39-110.83-58.82-123.89,0,0,24.72,14.85,54,81.56s87.27,87.58,94.69,90.71,56.46,26.33,56.95,2.42S333.67,112.91,327,104.87c0,0,34.9,37.5,34.09,79.42s32.93,34.22,48.59,24.86,60.31-55.22,32.73-106c0,0,22.54,19.94,17.36,53.78s-24,48.67-18,46.4,39-39.82,43.55-55.44c0,0-3.15,30.31-18.09,48.6S440,220.44,450.4,226.25s14.55,18.92,24.92,15.4-.15,12.11-18.38,11S430.26,260.56,436,250Z"/></svg>
+    <section class="customer-nav">
+      <button class="nav-btn">My bookings</button>
+      <button class="nav-btn">Book a room</button>
+    </section>
+    <section class="manager-nav">
+      <button class="nav-btn">Dashboard</button>
+      <button class="nav-btn">Bookings</button>
+    </section>
+  </nav>
+  <main>
+    <section class="customer-view">
+      <div class="account-name">
+        <h3>Welcome</h3>
+        <h1>Weary Traveler</h1>
+      </div>
+      <div class="customer-dashboard">
+        <h2>Your Bookings</h2>
+        <hr>
+        <div class="customer-bookings">
+          <p>Looks like you haven't booked anything yet. To book a room, visit the "Book a room" tab.</p>
+        </div>
+        <hr>
+        <div class="customer-info">
+          <h2>Your Total Bookings:</h2>
+          <p>0</p>
+          <h2>Total Spent:</h2>
+          <p>$0.00</p>
+        </div>
+      </div>
+      <div class="customer-book-a-room hidden">
+        <h2>Book a Room</h2>
+        <hr>
+        <div class="customer-options">
+          <label for="dateSelection">Select:</label>
+          <input type="date" id="dataSelection"/>
+          <label for="roomTypeSelection">Room Type:</label>
+          <select name="type" id="roomTypeSelection">
+            <option value="single room">single room</option>
+            <option value="junior suite">junior suite</option>
+            <option value="suite">suite</option>
+            <option value="residential suite">residential suite</option>
+          </select>
+        </div>
+        <hr>
+        <div>
+          <p>Oh no! It looks like we are totally booked on that day!</p>
+          <p>We deeply apologize for the inconvience!</p>
+        </div>
+        <hr>
+      </div>
+    </section>
+    <section class="manager-view hidden">
+      <div class="account-name">
+        <h1>Management</h1>
+      </div>
+      <div class="manager-dashboard">
+        <h2>Todays Date</h2>
+        <hr>
+        <div class="management-data">
+          <h2>Total Rooms Available Today:</h2>
+          <p>0</p>
+          <h2>Total Revenue for Today:</h2>
+          <p>$0.00</p>
+          <h2>Percent Rooms Occupied:</h2>
+          <p>0%</p>
+        </div>
+      </div>
+      <div class="customer-bookings hidden">
+        <h2>Customers</h2>
+        <label for="customerSeach">Customer search:</label>
+        <input type="text" id="customerSeach"/>
+        <hr>
+        <div>
+          <p>Unable to load customers at this time</p>
+        </div>
+        <hr>
+        <div class="manager-booking-options">
+          <label for="dateSelection">Select:</label>
+          <input type="date" id="dataSelection"/>
+          <label for="roomTypeSelection">Room Type:</label>
+          <select name="type" id="roomTypeSelection">
+            <option value="single room">single room</option>
+            <option value="junior suite">junior suite</option>
+            <option value="suite">suite</option>
+            <option value="residential suite">residential suite</option>
+          </select>
+        </div>
+        <hr>
+        <div>
+          <p>search results here</p>
+        </div>
+        <hr>
+      </div>
+    </section>
+    <section class="login-view hidden">
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 430.74"><defs><style>.cls-1{font-size:185.17px;font-family:Cinzel-SemiBold, Cinzel;font-weight:600;}.cls-1,.cls-6{fill:#f9f9fa;}.cls-2{letter-spacing:0em;}.cls-3{letter-spacing:-0.01em;}.cls-4{letter-spacing:0.01em;}.cls-5{letter-spacing:-0.01em;}</style></defs><text class="cls-1" transform="translate(35.22 372.65)">O<tspan class="cls-2" x="160.17" y="0">v</tspan><tspan class="cls-3" x="280.53" y="0">e</tspan><tspan x="382.74" y="0">rL</tspan><tspan class="cls-4" x="613.45" y="0">o</tspan><tspan class="cls-5" x="758.62" y="0">o</tspan><tspan x="899.9" y="0">k</tspan></text><path class="cls-6" d="M799.26,237s-9.66-17.53-34.19-14.72-82.74-18.48-100.84-28.2-43.72-28.06-74.72-21-58.63,11-78.29,35-30.23,27.56-41.8,30.13-28,2.51-37.79-17.31c0,0,24.84,20.31,49.65-1.23s34.44-34.93,30.14-38.69-32.43,6.08-42.27-1.47c0,0,27.6-2.93,31.12-13.5,1.71-5.12-18.95-24.2-24.37-28.47s-31.71-42.26-32-51.59c0,0,34.68,38.13,44.48,47.67S529.06,171.14,551,166s28.28-5.45,28.28-5.45,20-2.35,11.93-21.47c-6-14.2-41.14-98.27-52.16-109.85,0,0,21.92,13.16,47.86,72.31s77.38,77.65,84,80.43,50.06,23.35,50.5,2.15-12.76-68.62-18.66-75.75c0,0,30.94,33.25,30.22,70.42s29.2,30.34,43.08,22,53.48-49,29-94a54.88,54.88,0,0,1,15.39,47.68c-4.59,30-21.31,43.15-16,41.14S839,160.33,843,146.47c0,0-2.8,26.88-16,43.1S802.83,210.8,812.06,216s12.9,16.78,22.09,13.65-.13,10.75-16.3,9.75S794.2,246.38,799.26,237Z"/></svg>
+      <div class="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username"/>
+        <label for="password">Password:</label>
+        <input type="text" id="password"/>
+        <button class="btn">sign in</button>
+      </div>
+    </section>
+  </main>
+  <aside>
+    <button class="nav-btn">sign out</button>
+  </aside>
   
 </body>
 <script src="bundle.js"></script>
