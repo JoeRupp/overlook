@@ -1,13 +1,29 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
+// IMPORTS
+import { fetchAllData } from './apiCalls';
+import BookingsRepo from '../src/classes/BookingsRepo';
+import CustomerRepo from '../src/classes/CustomerRepo';
 import './css/styles.css';
+import './images/turing-logo.png';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// GLOBAL VARIABLES
+let customersData;
+let roomsData;
+let bookingsData;
+let bookingsRepo;
+let customerRepo;
+let currentCustomer;
+let currentManager;
 
+// FUNCTIONS
 
-console.log('This is the JavaScript entry file - your code begins here.');
+fetchAllData().then((data) => {
+  customersData = data[0].customers;
+  roomsData = data[1].rooms;
+  bookingsData = data[2].bookings;
+  startOverlookApplication();
+});
 
-// and so it begins
+const startOverlookApplication = () => {
+  bookingsRepo = new BookingsRepo(bookingsData, roomsData);
+  customerRepo = new CustomerRepo(customersData);
+}
