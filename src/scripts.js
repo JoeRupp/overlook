@@ -1,13 +1,11 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
+// IMPORTS
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
+import fetchedData from './apiCalls'
 import './images/turing-logo.png'
 
+// GLOBAL VARIABLES
+let customersData;
+let roomsData;
+let bookingsData;
 
-console.log('This is the JavaScript entry file - your code begins here.');
-
-// and so it begins
+// FUNCTIONS
