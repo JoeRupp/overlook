@@ -27,6 +27,8 @@ const bookNowBtn = document.querySelector('.book-room-btn');
 const deleteBookingBtn = document.querySelector('.delete-booking-btn');
 const managerBookRoomView = document.querySelector('.manager-book-room-btn');
 const managerCustomerBookingsView = document.querySelector('.manager-customer-bookings-btn');
+const signInUserName = document.querySelector('#username');
+const signInPassword = document.querySelector('#password');
 
 // FUNCTIONS
 
@@ -42,9 +44,24 @@ const startOverlookApplication = () => {
   customerRepo = new CustomerRepo(customersData);
 }
 
+const checkSignInCredentials = () => {
+  const userNameInput = signInUserName.value;
+  const userPasswordInput = signInPassword.value;
+  // const idInput = userNameInput.replace('customer', '')
+  // const customerInput = userNameInput.split('')
+  if (userNameInput === 'customer' && userPasswordInput === 'overlook2021') {
+    domUpdates.goToCustomerBookingsView();
+  } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
+    domUpdates.goToManagerDashboardView();
+  } else {
+    // create error here
+    console.log('nope');
+  }
+}
+
 // EVENTLISTENERS
 
-// signInBtn.addEventListener("click", checkSignInCredentials);
+signInBtn.addEventListener("click", checkSignInCredentials);
 signOutBtn.addEventListener("click", domUpdates.goToSignInView);
 customerBookingsNavBtn.addEventListener("click", domUpdates.goToCustomerBookingsView);
 customerBookRoomNavBtn.addEventListener("click", domUpdates.goToCustomerBookRoomView);

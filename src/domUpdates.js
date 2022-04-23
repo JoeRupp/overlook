@@ -5,6 +5,8 @@ const customerView = document.querySelector('.customer-view');
 const customerDashboard = document.querySelector('.customer-dashboard');
 const customerBookRoom = document.querySelector('.customer-book-a-room');
 const managerView = document.querySelector('.manager-view');
+const managerDashboard = document.querySelector('.manager-dashboard')
+const managerBookRoom = document.querySelector('.manager-customer-bookings')
 const signInView = document.querySelector('.login-view');
 const aside = document.querySelector('aside');
 
@@ -52,13 +54,32 @@ let domUpdates = {
   },
 
   goToManagerDashboardView() {
-
+    nav.classList.remove('collapsed');
+    customerNav.classList.add('collapsed');
+    managerNav.classList.remove('collapsed');
+    customerView.classList.add('collapsed');
+    managerView.classList.remove('collapsed');
+    managerDashboard.classList.remove('collapsed');
+    managerBookRoom.classList.add('collapsed');
+    signInView.classList.add('collapsed');
+    aside.classList.remove('collapsed');
+    managerDashboardNavBtn.classList.add('selected-state');
+    managerBookingsNavBtn.classList.remove('selected-state');
   },
 
   goToManagerBookingsView() {
-
+    nav.classList.remove('collapsed');
+    customerNav.classList.add('collapsed');
+    managerNav.classList.remove('collapsed');
+    customerView.classList.add('collapsed');
+    managerView.classList.remove('collapsed');
+    managerDashboard.classList.add('collapsed');
+    managerBookRoom.classList.remove('collapsed');
+    signInView.classList.add('collapsed');
+    aside.classList.remove('collapsed');
+    managerDashboardNavBtn.classList.remove('selected-state');
+    managerBookingsNavBtn.classList.add('selected-state');
   }
-
 
 }
 
