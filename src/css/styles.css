@@ -23,6 +23,16 @@ hr {
   border-top: 2px solid white;
 }
 
+.btn {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 25px;
+}
+
+.btn:hover {
+  background-color: rgba( 255, 255, 255, 0.2);
+}
+
 /* NAV --------------------------------------------------*/
 
 nav {
@@ -63,7 +73,6 @@ nav {
 }
 
 .nav-btn:hover:after {
-  /* background-color: rgba( 255, 255, 255, 0.2); */
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -88,12 +97,14 @@ h1 {
   overflow-y: scroll;
 }
 
+.management-info,
 .customer-info {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
+.management-stat,
 .customer-stats {
   margin-right: 5%;
 }
@@ -104,7 +115,74 @@ margin-right: 12%;
 
 /* MAIN/BOOK A ROOM -------------------------------------*/
 
+label {
+  font-weight: bold;
+  margin-right: 2%;
+}
 
+select,
+input {
+  border: 0;
+  border-radius: 25px;
+  margin-right: 10%;
+  background-color: rgba( 255, 255, 255, 0.2);
+}
+
+.search-box {
+  margin-right: 0%;
+}
+
+.customer-title-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.customer-search {
+  max-height: 3vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.manager-customer-search-results {
+  height: 15vh;
+  overflow-y: scroll;
+}
+
+.manager-bookings {
+  height: 37vh;
+  overflow-y: scroll;
+}
+
+/* MAIN/SIGN IN -----------------------------------------*/
+
+.login-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-logo {
+  width: 90%;
+  margin-top: 5%;
+  padding-right: 5%;
+}
+
+.sign-in {
+  width: 90%;
+  margin-top: 25%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-input {
+  margin-right: 5%;
+}
 
 /* ASIDE ------------------------------------------------*/
 
