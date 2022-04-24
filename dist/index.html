@@ -47,14 +47,16 @@
         <hr>
         <div class="customer-options">
           <label for="dateSelection">Select:</label>
-          <input type="date" id="dataSelection"/>
+          <input type="date" id="dateSelection"/>
           <label for="roomTypeSelection">Room Type:</label>
           <select name="type" id="roomTypeSelection">
+            <option value="all">all</option>
             <option value="single room">single room</option>
             <option value="junior suite">junior suite</option>
             <option value="suite">suite</option>
             <option value="residential suite">residential suite</option>
           </select>
+          <button class="btn filter-room-button">Filter rooms</button>
         </div>
         <hr>
         <div class="customer-available-rooms">
@@ -101,7 +103,7 @@
         <hr>
         <div class="manager-booking-options">
           <label for="dateSelection">Select:</label>
-          <input type="date" id="dataSelection"/>
+          <input type="date" id="dateSelection"/>
           <label for="roomTypeSelection">Room Type:</label>
           <select name="type" id="roomTypeSelection">
             <option value="single room">single room</option>

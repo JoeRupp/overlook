@@ -20,6 +20,15 @@ const customerTotalBookingsDisplay = document.querySelector('.customer-total-boo
 const customerTotalSpentDisplay = document.querySelector('.customer-total-spent');
 const customerBookingsDisplay = document.querySelector('.customer-bookings');
 const availableRoomDisplay = document.querySelector('.customer-available-rooms');
+const dateInput = document.querySelector('#dateSelection');
+
+const determineBidetStatus = (bidetStatus) => {
+  if (bidetStatus) {
+    return 'has bidet';
+  } else {
+    return 'no bidet';
+  }
+}
 
 let domUpdates = {
 
@@ -97,6 +106,7 @@ let domUpdates = {
       <section class="booking-preview" id="${eachBooking.bookingId}">
       <div class="room-info"><p class="room-num">Room ${eachBooking.number} - ${eachBooking.roomType}</p></div>
       <div class="room-info"><p>${eachBooking.bedSize} (${eachBooking.numBeds})</p></div>
+      <div class="room-info"><p>${determineBidetStatus(eachBooking.bidet)}</p></div>
       <div class="room-info"><p>$${eachBooking.costPerNight}</p></div>
       <div class="room-info"><p>${eachBooking.bookingDate}</p></div>
       </section>`
@@ -113,18 +123,28 @@ let domUpdates = {
     customerTotalSpentDisplay.innerHTML = customerTotalSpent
   },
 
+  setCurrentDate(currentDate) {
+    dateInput.value = currentDate;
+    dateInput.min = currentDate
+  },
+
   displayAvailableRooms(roomList) {
     const displayAvailableRooms = roomList.map((eachRoom) => {
       const bookingPreview = `
       <section class="booking-preview">
       <div class="room-info"><p class="room-num">Room ${eachRoom.number} - ${eachRoom.roomType}</p></div>
       <div class="room-info"><p>${eachRoom.bedSize} (${eachRoom.numBeds})</p></div>
+      <div class="room-info"><p>${determineBidetStatus(eachRoom.bidet)}</p></div>
       <div class="room-info"><p>$${eachRoom.costPerNight} /night</p></div>
-      <div class="room-info"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
+      <div class="room-info-btn"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
       </section>`
       return bookingPreview
     }).join('')
     availableRoomDisplay.innerHTML = displayAvailableRooms
+  },
+
+  displayAvailableRoomsByType(roomList, roomType) {
+
   }
 
 }

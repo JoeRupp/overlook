@@ -30,7 +30,8 @@ hr {
 }
 
 .btn:hover {
-  background-color: rgba( 255, 255, 255, 0.2);
+  color: black;
+  background-color: white
 }
 
 /* NAV --------------------------------------------------*/
@@ -110,6 +111,13 @@ h1 {
 .room-info {
   width: 100%;
   margin-left: 3%;
+}
+
+.room-info-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .room-num {

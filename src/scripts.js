@@ -5,6 +5,7 @@ import CustomerRepo from '../src/classes/CustomerRepo';
 import './css/styles.css';
 import './images/overlook-icon-03.png'
 import domUpdates from "./domUpdates";
+import dayjs from 'dayjs';
 // import './images/OverLook_Logo-antler.svg';
 
 // GLOBAL VARIABLES
@@ -14,7 +15,6 @@ let bookingsData;
 let bookingsRepo;
 let customerRepo;
 let currentCustomer;
-let todaysDate;
 
 // QUERYSELECTORS
 const signInBtn = document.querySelector('.sign-in-btn');
@@ -29,6 +29,9 @@ const managerBookRoomView = document.querySelector('.manager-book-room-btn');
 const managerCustomerBookingsView = document.querySelector('.manager-customer-bookings-btn');
 const signInUserName = document.querySelector('#username');
 const signInPassword = document.querySelector('#password');
+const dateInput = document.querySelector('#dateSelection');
+const roomTypeInput = document.querySelector('#roomTypeSelection');
+const filterRoomsBtn = document.querySelector('.filter-room-button');
 
 // FUNCTIONS
 
@@ -42,8 +45,6 @@ fetchAllData().then((data) => {
 const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
-  todaysDate = new Date()
-  console.log(todaysDate)
 }
 
 const checkSignInCredentials = () => {
@@ -62,7 +63,7 @@ const checkSignInCredentials = () => {
     getCustomer(idInput);
     domUpdates.goToCustomerBookingsView();
     loadCustomer();
-    loadAvailableRooms(bookingsRepo.getAvailableRooms(todaysDate));
+    loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
   } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
     domUpdates.goToManagerDashboardView();
     loadManager();
@@ -90,6 +91,17 @@ const loadCustomer = () => {
 
 const loadAvailableRooms = (roomList) => {
   domUpdates.displayAvailableRooms(roomList);
+  domUpdates.setCurrentDate(dayjs().format('YYYY-MM-DD'))
+}
+
+const filterRooms = () => {
+  let roomList;
+  if (roomTypeInput.value === 'all') {
+    roomList = bookingsRepo.getAvailableRooms(dayjs(dateInput.value).format('YYYY/MM/DD'));
+  } else {
+    roomList = bookingsRepo.filterRoomByType(roomTypeInput.value, dayjs(dateInput.value).format('YYYY/MM/DD'));
+  }
+  domUpdates.displayAvailableRooms(roomList);
 }
 
 const loadManager = () => {
@@ -104,3 +116,4 @@ customerBookingsNavBtn.addEventListener("click", domUpdates.goToCustomerBookings
 customerBookRoomNavBtn.addEventListener("click", domUpdates.goToCustomerBookRoomView);
 managerDashboardNavBtn.addEventListener("click", domUpdates.goToManagerDashboardView);
 managerBookingsNavBtn.addEventListener("click", domUpdates.goToManagerBookingsView);
+filterRoomsBtn.addEventListener("click", filterRooms)

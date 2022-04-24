@@ -17,7 +17,9 @@ class BookingsRepo {
       return list;
     }, []);
 
-    return createBooking;
+    return createBooking.sort((a, b) => {
+      return b.betterBookingDate - a.betterBookingDate;
+    })
   }
 
   getBookedRooms(date) {
