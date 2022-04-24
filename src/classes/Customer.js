@@ -11,7 +11,10 @@ class Customer {
       return booking.userId === this.id;
     })
 
-    this.roomBookings = findBookings;
+    this.roomBookings = findBookings
+    // .sort((a, b) => {
+    //   a.bookingDate - b.bookingDate
+    // })
   }
 
   getTotalSpent() {
@@ -20,7 +23,7 @@ class Customer {
       return total;
     }, 0)
 
-    this.totalSpent = calculateTotalSpent;
+    this.totalSpent = calculateTotalSpent.toFixed(2)
   }
 }
 

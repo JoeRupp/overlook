@@ -14,7 +14,7 @@ let bookingsData;
 let bookingsRepo;
 let customerRepo;
 let currentCustomer;
-let currentManager;
+let todaysDate;
 
 // QUERYSELECTORS
 const signInBtn = document.querySelector('.sign-in-btn');
@@ -42,21 +42,58 @@ fetchAllData().then((data) => {
 const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
+  todaysDate = new Date()
+  console.log(todaysDate)
 }
 
 const checkSignInCredentials = () => {
   const userNameInput = signInUserName.value;
   const userPasswordInput = signInPassword.value;
-  // const idInput = userNameInput.replace('customer', '')
-  // const customerInput = userNameInput.split('')
-  if (userNameInput === 'customer' && userPasswordInput === 'overlook2021') {
+  const idInput = userNameInput.replace('customer', '')
+  let userNameExists = false;
+
+  customerRepo.customerList.forEach((customer) => {
+    if (`customer${customer.id}` === userNameInput) {
+      userNameExists = true;
+    }
+  })
+
+  if (userNameExists === true && userPasswordInput === 'overlook2021') {
+    getCustomer(idInput);
     domUpdates.goToCustomerBookingsView();
+    loadCustomer();
+    loadAvailableRooms(bookingsRepo.getAvailableRooms(todaysDate));
   } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
     domUpdates.goToManagerDashboardView();
+    loadManager();
   } else {
     // create error here
     console.log('nope');
   }
+}
+
+const getCustomer = (idInput) => {
+  const findCustomer = customerRepo.customerList.filter((customer) => {
+    return customer.id === idInput*1;
+  })
+  currentCustomer = findCustomer[0];
+}
+
+const loadCustomer = () => {
+  currentCustomer.getRoomBookings(bookingsRepo.allBookingsList);
+  currentCustomer.getTotalSpent();
+  domUpdates.displayCustomerName(currentCustomer.name);
+  domUpdates.displayCustomerBookings(currentCustomer.roomBookings);
+  domUpdates.displayCustomerTotalBookings(currentCustomer.roomBookings.length);
+  domUpdates.displayCustomerTotalSpent(currentCustomer.totalSpent);
+}
+
+const loadAvailableRooms = (roomList) => {
+  domUpdates.displayAvailableRooms(roomList);
+}
+
+const loadManager = () => {
+
 }
 
 // EVENTLISTENERS
