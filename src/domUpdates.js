@@ -25,6 +25,10 @@ const roomTypeInput = document.querySelector('.room-type-selection');
 const signInErrorMessage = document.querySelector('.sign-in-error-message');
 const signInUserName = document.querySelector('#username');
 const signInPassword = document.querySelector('#password');
+const todaysDateDisplay = document.querySelector('.todays-date')
+const totalRoomsAvailableDisplay = document.querySelector('.number-of-rooms-available')
+const totalRevenueDisplay = document.querySelector('.total-revenue-today')
+const percentOccupiedDisplay = document.querySelector('.percent-occupied')
 
 const determineBidetStatus = (bidetStatus) => {
   if (bidetStatus) {
@@ -164,8 +168,20 @@ let domUpdates = {
     signInErrorMessage.classList.add('collapsed');
   },
 
-  displayAvailableRoomsByType(roomList, roomType) {
+  displayTodaysDate(date) {
+    todaysDateDisplay.innerHTML = date
+  },
 
+  displayTotalRoomsAvailableToday(availableRoomListNumber) {
+    totalRoomsAvailableDisplay.innerHTML = availableRoomListNumber
+  },
+
+  displayTotalRevenueForToday(totalRevenue) {
+    totalRevenueDisplay.innerHTML = `$${totalRevenue}`
+  },
+
+  displayPercentRoomsOccupied(percentOccupied) {
+    percentOccupiedDisplay.innerHTML = `${percentOccupied * 100}%`
   }
 
 }
