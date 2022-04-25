@@ -1,5 +1,6 @@
 // IMPORTS
 import { fetchAllData } from './apiCalls';
+import { postData } from './apiCalls';
 import BookingsRepo from '../src/classes/BookingsRepo';
 import CustomerRepo from '../src/classes/CustomerRepo';
 import './css/styles.css';
@@ -115,7 +116,7 @@ const filterRooms = () => {
 
 const createBookingInfo = (roomInfo) => {
   return {
-    id: `overlook${Date.now()}`,
+    // id: `overlook${Date.now()}`,
     userID: currentCustomer.id, 
     date: dayjs(dateInput.value).format('YYYY/MM/DD'),
     roomNumber: roomInfo.number
@@ -141,9 +142,21 @@ customerAvailableRoomsDisplay.addEventListener('click', function(event) {
   if (event.target.classList[1] === 'book-room-btn') {
     roomsData.forEach((room) => {
       if (room.number === event.target.id * 1) {
-        bookingsRepo.bookARoom(room, createBookingInfo(room));
-        loadCustomer();
-        filterRooms();
+        const newBooking = createBookingInfo(room);
+        postData(newBooking)
+        .then(() => {
+          fetchAllData().then((data) => {
+            customersData = data[0].customers;
+            roomsData = data[1].rooms;
+            bookingsData = data[2].bookings;
+
+            // bookingsRepo.bookARoom(room, newBooking)
+            bookingsRepo = new BookingsRepo(bookingsData, roomsData)
+
+            loadCustomer();
+            filterRooms();
+          })
+        })
       }
     })
   }   
