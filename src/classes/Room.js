@@ -9,6 +9,12 @@ class Room {
     this.bookingId = bookingsData.id;
     this.userId = bookingsData.userID;
     this.bookingDate = bookingsData.date;
+    this.betterBookingDate = this.getBetterDate();
+  }
+
+  getBetterDate() {
+    const date = new Date(this.bookingDate)
+    return date.getTime();
   }
 }
 
