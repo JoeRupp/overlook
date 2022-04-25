@@ -29,9 +29,10 @@ const managerBookRoomView = document.querySelector('.manager-book-room-btn');
 const managerCustomerBookingsView = document.querySelector('.manager-customer-bookings-btn');
 const signInUserName = document.querySelector('#username');
 const signInPassword = document.querySelector('#password');
-const dateInput = document.querySelector('#dateSelection');
-const roomTypeInput = document.querySelector('#roomTypeSelection');
+const dateInput = document.querySelector('.date-selection');
+const roomTypeInput = document.querySelector('.room-type-selection');
 const filterRoomsBtn = document.querySelector('.filter-room-button');
+const customerAvailableRoomsDisplay = document.querySelector('.customer-available-rooms')
 
 // FUNCTIONS
 
@@ -45,6 +46,12 @@ fetchAllData().then((data) => {
 const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
+  // DELETE THIS LATER
+  currentCustomer = customerRepo.customerList[0]
+  domUpdates.goToCustomerBookingsView();
+  loadCustomer();
+  loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  // DELETE THIS LATER
 }
 
 const checkSignInCredentials = () => {
@@ -64,11 +71,13 @@ const checkSignInCredentials = () => {
     domUpdates.goToCustomerBookingsView();
     loadCustomer();
     loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+    domUpdates.removeSignInError();
   } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
     domUpdates.goToManagerDashboardView();
     loadManager();
+    domUpdates.removeSignInError();
   } else {
-    // create error here
+    domUpdates.displaySignInError();
     console.log('nope');
   }
 }
@@ -104,16 +113,38 @@ const filterRooms = () => {
   domUpdates.displayAvailableRooms(roomList);
 }
 
+const createBookingInfo = (roomInfo) => {
+  return {
+    id: `overlook${Date.now()}`,
+    userID: currentCustomer.id, 
+    date: dayjs(dateInput.value).format('YYYY/MM/DD'),
+    roomNumber: roomInfo.number
+  }
+}
+
 const loadManager = () => {
 
 }
 
 // EVENTLISTENERS
 
-signInBtn.addEventListener("click", checkSignInCredentials);
-signOutBtn.addEventListener("click", domUpdates.goToSignInView);
-customerBookingsNavBtn.addEventListener("click", domUpdates.goToCustomerBookingsView);
-customerBookRoomNavBtn.addEventListener("click", domUpdates.goToCustomerBookRoomView);
-managerDashboardNavBtn.addEventListener("click", domUpdates.goToManagerDashboardView);
-managerBookingsNavBtn.addEventListener("click", domUpdates.goToManagerBookingsView);
-filterRoomsBtn.addEventListener("click", filterRooms)
+signInBtn.addEventListener('click', checkSignInCredentials);
+signOutBtn.addEventListener('click', domUpdates.goToSignInView);
+customerBookingsNavBtn.addEventListener('click', domUpdates.goToCustomerBookingsView);
+customerBookRoomNavBtn.addEventListener('click', domUpdates.goToCustomerBookRoomView);
+managerDashboardNavBtn.addEventListener('click', domUpdates.goToManagerDashboardView);
+managerBookingsNavBtn.addEventListener('click', domUpdates.goToManagerBookingsView);
+filterRoomsBtn.addEventListener('click', filterRooms);
+
+
+customerAvailableRoomsDisplay.addEventListener('click', function(event) {
+  if (event.target.classList[1] === 'book-room-btn') {
+    roomsData.forEach((room) => {
+      if (room.number === event.target.id * 1) {
+        bookingsRepo.bookARoom(room, createBookingInfo(room));
+        loadCustomer();
+        filterRooms();
+      }
+    })
+  }   
+});

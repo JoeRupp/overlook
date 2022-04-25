@@ -47,21 +47,20 @@
         <hr>
         <div class="customer-options">
           <label for="dateSelection">Select:</label>
-          <input type="date" id="dateSelection"/>
+          <input type="date" class="date-selection" id="dateSelection"/>
           <label for="roomTypeSelection">Room Type:</label>
-          <select name="type" id="roomTypeSelection">
-            <option value="all">all</option>
-            <option value="single room">single room</option>
-            <option value="junior suite">junior suite</option>
-            <option value="suite">suite</option>
-            <option value="residential suite">residential suite</option>
+          <select name="type" class="room-type-selection" id="roomTypeSelection">
+            <option tabindex="0" value="all" role="option">all</option>
+            <option tabindex="1" value="single room" role="option">single room</option>
+            <option tabindex="2" value="junior suite" role="option">junior suite</option>
+            <option tabindex="3" value="suite" role="option">suite</option>
+            <option tabindex="4" value="residential suite" role="option">residential suite</option>
           </select>
           <button class="btn filter-room-button">Filter rooms</button>
         </div>
         <hr>
         <div class="customer-available-rooms">
-          <p>Oh no! It looks like we are totally booked on that day!</p>
-          <p>We deeply apologize for the inconvience!</p>
+          <p>Oh no! Something went wrong. We are unable to load any rooms at this time.</p>
         </div>
         <hr>
       </div>
@@ -102,10 +101,10 @@
         </div>
         <hr>
         <div class="manager-booking-options">
-          <label for="dateSelection">Select:</label>
-          <input type="date" id="dateSelection"/>
-          <label for="roomTypeSelection">Room Type:</label>
-          <select name="type" id="roomTypeSelection">
+          <label for="managerDateSelection">Select:</label>
+          <input type="date" class="date-selection" id="managerDateSelection"/>
+          <label for="managerRoomTypeSelection">Room Type:</label>
+          <select name="type" class="room-type-selection" id="managerRoomTypeSelection">
             <option value="single room">single room</option>
             <option value="junior suite">junior suite</option>
             <option value="suite">suite</option>
@@ -116,7 +115,7 @@
         </div>
         <hr>
         <div class="manager-bookings">
-          <p>search results here</p>
+          <p>Unable to load bookings at this time</p>
         </div>
         <hr>
       </div>
@@ -131,6 +130,9 @@
         <label for="password">Password:</label>
         <input class="sign-in-input" type="text" id="password"/>
         <button class="btn sign-in-btn">sign in</button>
+      </div>
+      <div class="sign-in-error-message collapsed">
+        <p>⚠️ incorrect username or password</p>
       </div>
     </section>
   </main>

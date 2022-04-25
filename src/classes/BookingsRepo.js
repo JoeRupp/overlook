@@ -55,7 +55,7 @@ class BookingsRepo {
 
   bookARoom(roomInfo, bookingInfo) {
     const newBooking = new Room(roomInfo, bookingInfo)
-    this.allBookingsList.push(newBooking)
+    this.allBookingsList.unshift(newBooking)
   }
 };
 

@@ -27,6 +27,7 @@ hr {
   background-color: transparent;
   border: 1px solid white;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -152,6 +153,7 @@ input {
   border: 0;
   border-radius: 25px;
   margin-right: 10%;
+  cursor: pointer;
   background-color: rgba( 255, 255, 255, 0.2);
 }
 
@@ -201,7 +203,7 @@ input {
 
 .sign-in {
   width: 90%;
-  margin-top: 25%;
+  margin-top: 20%;
   padding-right: 5%;
   display: flex;
   justify-content: center;
@@ -209,6 +211,15 @@ input {
 
 .sign-in-input {
   margin-right: 5%;
+}
+
+.sign-in-error-message {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-error {
+  border: 2px solid red;
 }
 
 /* ASIDE ------------------------------------------------*/

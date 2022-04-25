@@ -21,6 +21,10 @@ const customerTotalSpentDisplay = document.querySelector('.customer-total-spent'
 const customerBookingsDisplay = document.querySelector('.customer-bookings');
 const availableRoomDisplay = document.querySelector('.customer-available-rooms');
 const dateInput = document.querySelector('#dateSelection');
+const roomTypeInput = document.querySelector('.room-type-selection');
+const signInErrorMessage = document.querySelector('.sign-in-error-message');
+const signInUserName = document.querySelector('#username');
+const signInPassword = document.querySelector('#password');
 
 const determineBidetStatus = (bidetStatus) => {
   if (bidetStatus) {
@@ -38,6 +42,7 @@ let domUpdates = {
     managerView.classList.add('collapsed');
     signInView.classList.remove('collapsed');
     aside.classList.add('collapsed');
+    roomTypeInput.value = 'all'
   },
 
   goToCustomerBookingsView() {
@@ -105,8 +110,7 @@ let domUpdates = {
       const bookingPreview = `
       <section class="booking-preview" id="${eachBooking.bookingId}">
       <div class="room-info"><p class="room-num">Room ${eachBooking.number} - ${eachBooking.roomType}</p></div>
-      <div class="room-info"><p>${eachBooking.bedSize} (${eachBooking.numBeds})</p></div>
-      <div class="room-info"><p>${determineBidetStatus(eachBooking.bidet)}</p></div>
+      <div class="room-info"><p>${eachBooking.bedSize} (${eachBooking.numBeds}) - ${determineBidetStatus(eachBooking.bidet)}</p></div>
       <div class="room-info"><p>$${eachBooking.costPerNight}</p></div>
       <div class="room-info"><p>${eachBooking.bookingDate}</p></div>
       </section>`
@@ -120,7 +124,7 @@ let domUpdates = {
   },
 
   displayCustomerTotalSpent(customerTotalSpent) {
-    customerTotalSpentDisplay.innerHTML = customerTotalSpent
+    customerTotalSpentDisplay.innerHTML = `$${customerTotalSpent}`
   },
 
   setCurrentDate(currentDate) {
@@ -129,18 +133,35 @@ let domUpdates = {
   },
 
   displayAvailableRooms(roomList) {
-    const displayAvailableRooms = roomList.map((eachRoom) => {
-      const bookingPreview = `
-      <section class="booking-preview">
-      <div class="room-info"><p class="room-num">Room ${eachRoom.number} - ${eachRoom.roomType}</p></div>
-      <div class="room-info"><p>${eachRoom.bedSize} (${eachRoom.numBeds})</p></div>
-      <div class="room-info"><p>${determineBidetStatus(eachRoom.bidet)}</p></div>
-      <div class="room-info"><p>$${eachRoom.costPerNight} /night</p></div>
-      <div class="room-info-btn"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
-      </section>`
-      return bookingPreview
-    }).join('')
-    availableRoomDisplay.innerHTML = displayAvailableRooms
+    if (roomList.length === 0) {
+      availableRoomDisplay.innerHTML = '<p class="room-num">Oh no! It looks like we are totally booked on that day! We deeply apologize for the inconvience!</p>'
+    } else {
+      const displayAvailableRooms = roomList.map((eachRoom) => {
+        const bookingPreview = `
+        <section class="booking-preview">
+        <div class="room-info"><p class="room-num">Room ${eachRoom.number} - ${eachRoom.roomType}</p></div>
+        <div class="room-info"><p>${eachRoom.bedSize} (${eachRoom.numBeds}) - ${determineBidetStatus(eachRoom.bidet)}</p></div>
+        <div class="room-info"><p>$${eachRoom.costPerNight} /night</p></div>
+        <div class="room-info-btn"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
+        </section>`
+        return bookingPreview
+      }).join('')
+      availableRoomDisplay.innerHTML = displayAvailableRooms
+    }
+  },
+
+  displaySignInError() {
+    signInUserName.classList.add('sign-in-error');
+    signInPassword.classList.add('sign-in-error');
+    signInErrorMessage.classList.remove('collapsed');
+  },
+
+  removeSignInError() {
+    signInUserName.value = '';
+    signInPassword.value = '';
+    signInUserName.classList.remove('sign-in-error');
+    signInPassword.classList.remove('sign-in-error');
+    signInErrorMessage.classList.add('collapsed');
   },
 
   displayAvailableRoomsByType(roomList, roomType) {
