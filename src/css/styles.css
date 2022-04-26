@@ -1,8 +1,8 @@
 /* UNIVERSAL --------------------------------------------*/
 
 * {
-  font-family: 'Plus Jakarta Sans', sans-serif;
   color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
@@ -50,28 +50,28 @@ nav {
 }
 
 .nav-btn {
-  border: none;
   background-color: transparent;
+  border: none;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 10%;
-  margin-left: 10%;
-  padding-bottom: 5%;
   display: inline-block;
+  font-size: 1rem;
+  margin-left: 10%;
+  margin-top: 10%;
+  padding-bottom: 5%;
   position: relative;
 }
 
 .nav-btn:after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
   background-color: white;
+  bottom: 0;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
+  width: 100%;
 }
 
 .nav-btn:hover:after {
@@ -112,8 +112,8 @@ h1 {
 
 .customer-info,
 .room-info {
-  width: 100%;
   margin-left: 3%;
+  width: 100%;
 }
 
 .room-info-btn {
@@ -140,7 +140,7 @@ h1 {
 }
 
 .customer-total-bookings {
-margin-right: 12%;
+  margin-right: 12%;
 }
 
 /* MAIN/BOOK A ROOM -------------------------------------*/
@@ -152,11 +152,11 @@ label {
 
 select,
 input {
+  background-color: rgba( 255, 255, 255, 0.2);
   border: 0;
   border-radius: 25px;
-  margin-right: 10%;
   cursor: pointer;
-  background-color: rgba( 255, 255, 255, 0.2);
+  margin-right: 10%;
 }
 
 .search-box {
@@ -165,17 +165,17 @@ input {
 
 .customer-title-search {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 }
 
 .customer-search {
   max-height: 3vh;
   width: 30vw;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -198,15 +198,15 @@ input {
 }
 
 .main-logo {
-  width: 90%;
   margin-top: 5%;
   padding-right: 5%;
+  width: 90%;
 }
 
 .sign-in {
-  width: 90%;
   margin-top: 20%;
   padding-right: 5%;
+  width: 90%;
   display: flex;
   justify-content: center;
 }
@@ -229,8 +229,8 @@ input {
 
 aside {
   grid-area: aside;
-  padding-top: 15%;
   padding-right: 15%; 
+  padding-top: 15%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -245,19 +245,19 @@ body {
 }
 
 .selected-state {
-  display: inline-block;
   position: relative;
+  display: inline-block;
 }
 
 .selected-state:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    transform: scaleX(1);
+  background-color: white;
+  bottom: 0;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(1);
+  width: 100%;
 }
 
 .collapsed {

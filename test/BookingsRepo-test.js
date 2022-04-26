@@ -7,7 +7,6 @@ describe('BookingsRepo Tests', function() {
   let bookingsData;
   let roomsData;
 
-
   beforeEach(() => {
     bookingsData =  [
       {
@@ -94,50 +93,35 @@ describe('BookingsRepo Tests', function() {
     expect(bookingsRepo.allBookingsList).to.an("array");
     expect(bookingsRepo.allBookingsList.length).to.equal(4);
     expect(bookingsRepo.allBookingsList[0]).to.an.instanceOf(Room);
-    expect(bookingsRepo.allBookingsList[3].bookingId).to.equal('5fwrgu4i7k55hl6t7');
+    expect(bookingsRepo.allBookingsList[3].bookingId).to.equal('5fwrgu4i7k55hl6t6');
   });
 
   it("Should have a method that returns a list of booked rooms on a particular date", () => {
-    const bookedRoom = bookingsRepo.getBookedRooms("2022/04/22")
-    const bookedRoomTwo = bookingsRepo.getBookedRooms("2023/01/01")
+    const bookedRoom = bookingsRepo.getBookedRooms("2022/04/22");
+    const bookedRoomTwo = bookingsRepo.getBookedRooms("2023/01/01");
 
     expect(bookedRoom[0].bookingId).to.equal("5fwrgu4i7k55hl6sz");
     expect(bookedRoomTwo.length).to.equal(0);
   });
 
   it("Should have a method that returns a list of available rooms on a particular date", () => {
-    const availableRooms = bookingsRepo.getAvailableRooms("2022/04/22")
+    const availableRooms = bookingsRepo.getAvailableRooms("2022/04/22");
 
     expect(availableRooms.length).to.equal(3);
     expect(availableRooms[0].number).to.equal(2);
   });
 
   it("Should have a method that returns a list of available rooms based on room type", () => {
-    const availableRooms = bookingsRepo.getAvailableRooms("2022/04/22")
+    const availableRooms = bookingsRepo.getAvailableRooms("2022/04/22");
 
     expect(availableRooms.length).to.equal(3);
     expect(availableRooms[0].number).to.equal(2);
   });
 
   it("Should have a method that returns a list of available rooms based on room type", () => {
-    const singleRooms = bookingsRepo.filterRoomByType("single room", "2022/06/27")
+    const singleRooms = bookingsRepo.filterRoomByType("single room", "2022/06/27");
 
     expect(singleRooms.length).to.equal(2);
     expect(singleRooms[0].number).to.equal(3);
-  });
-
-  it("Should have a method that allows a room to be booked", () => {
-    const roomInfo = roomsData[2]
-    const newBookingInfo = {
-      id: "test12345",
-      userID: 1,
-      date: "2022/06/21",
-      roomNumber: 4
-    }
-
-    bookingsRepo.bookARoom(roomInfo, newBookingInfo)
-
-    expect(bookingsRepo.allBookingsList.length).to.equal(5);
-    expect(bookingsRepo.allBookingsList[4].bookingId).to.equal("test12345");
   });
 });

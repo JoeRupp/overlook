@@ -90,5 +90,4 @@ describe('Customer Tests', function() {
 
     expect(customer.totalSpent).to.be.equal(849.54);
   });
-
 });

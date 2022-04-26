@@ -13,7 +13,7 @@ class Room {
   }
 
   getBetterDate() {
-    const date = new Date(this.bookingDate)
+    const date = new Date(this.bookingDate);
     return date.getTime();
   }
 }
