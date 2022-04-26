@@ -69,11 +69,12 @@ const checkSignInCredentials = () => {
     getCustomer(idInput);
     domUpdates.goToCustomerBookingsView();
     loadCustomer();
-    loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+    loadAvailableRooms();
     domUpdates.removeSignInError();
   } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
     domUpdates.goToManagerDashboardView();
     loadManager();
+    managerLoadAvailableRooms();
     domUpdates.removeSignInError();
   } else {
     domUpdates.displaySignInError();
@@ -96,9 +97,15 @@ const loadCustomer = () => {
   domUpdates.displayCustomerTotalSpent(currentCustomer.totalSpent);
 }
 
-const loadAvailableRooms = (roomList) => {
-  domUpdates.displayAvailableRooms(roomList);
-  domUpdates.setCurrentDate(dayjs().format('YYYY-MM-DD'))
+const loadAvailableRooms = () => {
+  domUpdates.displayAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  domUpdates.setCurrentDate(dayjs().format('YYYY-MM-DD'));
+}
+
+const managerLoadAvailableRooms = () => {
+  domUpdates.displayAllCustomers(customerRepo.customerList);
+  domUpdates.managerDisplayAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  domUpdates.managerSetCurrentDate(dayjs().format('YYYY-MM-DD'));
 }
 
 const filterRooms = () => {
@@ -140,7 +147,6 @@ managerBookingsNavBtn.addEventListener('click', domUpdates.goToManagerBookingsVi
 filterRoomsBtn.addEventListener('click', filterRooms);
 
 customerAvailableRoomsDisplay.addEventListener('click', function(event) {
-  console.log(event)
   if (event.target.classList[1] === 'book-room-btn') {
     roomsData.forEach((room) => {
       if (room.number === event.target.id * 1) {

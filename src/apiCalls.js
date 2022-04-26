@@ -1,3 +1,5 @@
+const fetchErrorMessage = document.querySelector('.fetch-error-message')
+
 // GET
 const fetchData = (extension) => {
   return fetch(`http://localhost:3001/api/v1/${extension}`)
@@ -8,7 +10,9 @@ const fetchData = (extension) => {
         throw Error(response.statusText)
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      fetchErrorMessage.classList.remove('collapsed');
+      console.log(err)});
 };
 
 const fetchAllData = () => {
@@ -39,11 +43,5 @@ const postData = (data) => {
     .catch(err => console.log(err))
 };
 
-// DELETE
-const deleteData = (data) => {
-
-}
-
 export { fetchAllData };
 export { postData };
-export { deleteData };
