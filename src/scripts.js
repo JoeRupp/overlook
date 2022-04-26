@@ -41,6 +41,12 @@ fetchAllData().then((data) => {
 const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
+  // ACCESSIBILITY TESTING _________________________________________________________
+  currentCustomer = customerRepo.customerList[0]
+  domUpdates.goToCustomerBookingsView();
+  loadCustomer();
+  loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  // ACCESSIBILITY TESTING _________________________________________________________
 }
 
 const checkSignInCredentials = () => {
