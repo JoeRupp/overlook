@@ -20,18 +20,19 @@ const customerTotalBookingsDisplay = document.querySelector('.customer-total-boo
 const customerTotalSpentDisplay = document.querySelector('.customer-total-spent');
 const customerBookingsDisplay = document.querySelector('.customer-bookings');
 const availableRoomDisplay = document.querySelector('.customer-available-rooms');
-const dateInput = document.querySelector('#dateSelection');
-const roomTypeInput = document.querySelector('.room-type-selection');
-const signInErrorMessage = document.querySelector('.sign-in-error-message');
-const signInUserName = document.querySelector('#username');
-const signInPassword = document.querySelector('#password');
 const todaysDateDisplay = document.querySelector('.todays-date')
 const totalRoomsAvailableDisplay = document.querySelector('.number-of-rooms-available')
 const totalRevenueDisplay = document.querySelector('.total-revenue-today')
 const percentOccupiedDisplay = document.querySelector('.percent-occupied')
-const managerDateInput = document.querySelector('#managerDateSelection')
 const managerAvailbleRoomDisplay = document.querySelector('.manager-bookings')
 const managerCustomerDisplay = document.querySelector('.manager-customer-search-results')
+
+const signInUserName = document.querySelector('#username');
+const signInPassword = document.querySelector('#password');
+const dateInput = document.querySelector('#dateSelection');
+const roomTypeInput = document.querySelector('.room-type-selection');
+const managerDateInput = document.querySelector('#managerDateSelection')
+const signInErrorMessage = document.querySelector('.sign-in-error-message');
 
 const determineBidetStatus = (bidetStatus) => {
   if (bidetStatus) {
@@ -49,7 +50,7 @@ let domUpdates = {
     managerView.classList.add('collapsed');
     signInView.classList.remove('collapsed');
     aside.classList.add('collapsed');
-    roomTypeInput.value = 'all'
+    roomTypeInput.value = 'all';
   },
 
   goToCustomerBookingsView() {
@@ -109,7 +110,7 @@ let domUpdates = {
   },
 
   displayCustomerName(customerName) {
-    customerNameDisplay.innerHTML = customerName
+    customerNameDisplay.innerHTML = customerName;
   },
 
   displayCustomerBookings(customerRoomBookings) {
@@ -123,20 +124,20 @@ let domUpdates = {
       </section>`
       return bookingPreview
     }).join('')
-    customerBookingsDisplay.innerHTML = displayBookings
+    customerBookingsDisplay.innerHTML = displayBookings;
   },
 
   displayCustomerTotalBookings(customerRoomBookingsLength) {
-    customerTotalBookingsDisplay.innerHTML = customerRoomBookingsLength
+    customerTotalBookingsDisplay.innerHTML = customerRoomBookingsLength;
   },
 
   displayCustomerTotalSpent(customerTotalSpent) {
-    customerTotalSpentDisplay.innerHTML = `$${customerTotalSpent}`
+    customerTotalSpentDisplay.innerHTML = `$${customerTotalSpent}`;
   },
 
   setCurrentDate(currentDate) {
     dateInput.value = currentDate;
-    dateInput.min = currentDate
+    dateInput.min = currentDate;
   },
 
   displayAvailableRooms(roomList) {
@@ -153,7 +154,7 @@ let domUpdates = {
         </section>`
         return bookingPreview
       }).join('')
-      availableRoomDisplay.innerHTML = displayAvailableRooms
+      availableRoomDisplay.innerHTML = displayAvailableRooms;
     }
   },
 
@@ -172,19 +173,19 @@ let domUpdates = {
   },
 
   displayTodaysDate(date) {
-    todaysDateDisplay.innerHTML = date
+    todaysDateDisplay.innerHTML = date;
   },
 
   displayTotalRoomsAvailableToday(availableRoomListNumber) {
-    totalRoomsAvailableDisplay.innerHTML = availableRoomListNumber
+    totalRoomsAvailableDisplay.innerHTML = availableRoomListNumber;
   },
 
   displayTotalRevenueForToday(totalRevenue) {
-    totalRevenueDisplay.innerHTML = `$${totalRevenue}`
+    totalRevenueDisplay.innerHTML = `$${totalRevenue}`;
   },
 
   displayPercentRoomsOccupied(percentOccupied) {
-    percentOccupiedDisplay.innerHTML = `${percentOccupied * 100}%`
+    percentOccupiedDisplay.innerHTML = `${(percentOccupied * 100).toFixed(2)}%`;
   },
 
   displayAllCustomers(customerList) {
@@ -199,7 +200,7 @@ let domUpdates = {
         </section>`
         return customerPreview
       }).join('')
-      managerCustomerDisplay.innerHTML = displayCustomers
+      managerCustomerDisplay.innerHTML = displayCustomers;
     }
   },
 
@@ -213,11 +214,10 @@ let domUpdates = {
         <div class="room-info"><p class="room-num">Room ${eachRoom.number} - ${eachRoom.roomType}</p></div>
         <div class="room-info"><p>${eachRoom.bedSize} (${eachRoom.numBeds}) - ${determineBidetStatus(eachRoom.bidet)}</p></div>
         <div class="room-info"><p>$${eachRoom.costPerNight} /night</p></div>
-        <div class="room-info-btn"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
         </section>`
         return bookingPreview
       }).join('')
-      managerAvailbleRoomDisplay.innerHTML = displayAvailableRooms
+      managerAvailbleRoomDisplay.innerHTML = displayAvailableRooms;
     }
   },
 

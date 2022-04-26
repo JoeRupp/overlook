@@ -43,5 +43,4 @@ describe('CustomerRepo Tests', function() {
     expect(customerRepo.customerList[0]).to.an.instanceOf(Customer);
     expect(customerRepo.customerList[3].name).to.equal("Kennedi Emard");
   });
-
 });

@@ -24,7 +24,7 @@ class BookingsRepo {
 
   getBookedRooms(date) {
     const findBookings = this.allBookingsList.filter((booking) => {
-      return booking.bookingDate === date
+      return booking.bookingDate === date;
     });
 
     return findBookings;
@@ -44,18 +44,13 @@ class BookingsRepo {
   }
 
   filterRoomByType(type, date) {
-    const availableRooms = this.getAvailableRooms(date)
+    const availableRooms = this.getAvailableRooms(date);
 
     const findRoomsByType = availableRooms.filter((room) => {
       return room.roomType === type;
     });
 
     return findRoomsByType;
-  }
-
-  bookARoom(roomInfo, bookingInfo) {
-    const newBooking = new Room(roomInfo, bookingInfo)
-    this.allBookingsList.unshift(newBooking)
   }
 };
 

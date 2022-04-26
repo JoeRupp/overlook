@@ -20,7 +20,7 @@ class Customer {
       return total;
     }, 0)
 
-    this.totalSpent = calculateTotalSpent.toFixed(2)
+    this.totalSpent = Number(calculateTotalSpent.toFixed(2))
     return calculateTotalSpent.toFixed(2)
   }
 }

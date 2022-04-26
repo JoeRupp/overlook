@@ -69,4 +69,8 @@ describe('Room Tests', function() {
   it("Should have a booking date", () => {
     expect(room.bookingDate).to.be.equal("2022/04/22");
   });
+
+  it("Should have a method to change its date to be in millseconds and store it in the constructor", () => {
+    expect(room.betterBookingDate).to.be.equal(1650607200000);
+  });
 });

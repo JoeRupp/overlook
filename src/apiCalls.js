@@ -7,7 +7,7 @@ const fetchData = (extension) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw Error(response.statusText)
+        throw Error(response.statusText);
       }
     })
     .catch(err => {
@@ -24,7 +24,6 @@ const fetchAllData = () => {
 }
 
 // POST
-
 const postData = (data) => {
   return fetch(`http://localhost:3001/api/v1/bookings`, {
       method: "POST",
@@ -40,7 +39,7 @@ const postData = (data) => {
         throw Error(response.statusText);
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 };
 
 export { fetchAllData };

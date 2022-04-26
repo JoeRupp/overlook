@@ -3,10 +3,10 @@ import { fetchAllData } from './apiCalls';
 import { postData } from './apiCalls';
 import BookingsRepo from '../src/classes/BookingsRepo';
 import CustomerRepo from '../src/classes/CustomerRepo';
-import './css/styles.css';
-import './images/overlook-icon-03.png'
 import domUpdates from "./domUpdates";
 import dayjs from 'dayjs';
+import './css/styles.css';
+import './images/overlook-icon-03.png'
 
 // GLOBAL VARIABLES
 let customersData;
@@ -19,20 +19,16 @@ let currentCustomer;
 // QUERYSELECTORS
 const signInBtn = document.querySelector('.sign-in-btn');
 const signOutBtn = document.querySelector('.sign-out-btn');
+const signInUserName = document.querySelector('#username');
+const signInPassword = document.querySelector('#password');
 const customerBookingsNavBtn = document.querySelector('.customer-bookings-nav-btn');
 const customerBookRoomNavBtn = document.querySelector('.customer-book-room-nav-btn');
 const managerDashboardNavBtn = document.querySelector('.manager-dashboard-nav-btn');
 const managerBookingsNavBtn = document.querySelector('.manager-bookings-nav-btn');
-const bookNowBtn = document.querySelector('.book-room-btn');
-const deleteBookingBtn = document.querySelector('.delete-booking-btn');
-const managerBookRoomView = document.querySelector('.manager-book-room-btn');
-const managerCustomerBookingsView = document.querySelector('.manager-customer-bookings-btn');
-const signInUserName = document.querySelector('#username');
-const signInPassword = document.querySelector('#password');
 const dateInput = document.querySelector('.date-selection');
 const roomTypeInput = document.querySelector('.room-type-selection');
 const filterRoomsBtn = document.querySelector('.filter-room-button');
-const customerAvailableRoomsDisplay = document.querySelector('.customer-available-rooms')
+const customerAvailableRoomsDisplay = document.querySelector('.customer-available-rooms');
 
 // FUNCTIONS
 fetchAllData().then((data) => {
@@ -45,18 +41,12 @@ fetchAllData().then((data) => {
 const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
-  // DELETE THIS LATER
-  // currentCustomer = customerRepo.customerList[0]
-  // domUpdates.goToCustomerBookingsView();
-  // loadCustomer();
-  // loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
-  // DELETE THIS LATER
 }
 
 const checkSignInCredentials = () => {
   const userNameInput = signInUserName.value;
   const userPasswordInput = signInPassword.value;
-  const idInput = userNameInput.replace('customer', '')
+  const idInput = userNameInput.replace('customer', '');
   let userNameExists = false;
 
   customerRepo.customerList.forEach((customer) => {
@@ -132,9 +122,9 @@ const loadManager = () => {
   const getTotalCost = bookingsRepo.getBookedRooms(dayjs().format('YYYY/MM/DD')).reduce((total, booking) => {
     total += booking.costPerNight;
     return total;
-  }, 0).toFixed(2)
+  }, 0).toFixed(2);
   domUpdates.displayTotalRevenueForToday(getTotalCost);
-  domUpdates.displayPercentRoomsOccupied(((bookingsRepo.getBookedRooms(dayjs().format('YYYY/MM/DD')).length)/25).toFixed(4));
+  domUpdates.displayPercentRoomsOccupied(((bookingsRepo.getBookedRooms(dayjs().format('YYYY/MM/DD')).length)/25));
 }
 
 // EVENTLISTENERS
@@ -157,7 +147,6 @@ customerAvailableRoomsDisplay.addEventListener('click', function(event) {
             customersData = data[0].customers;
             roomsData = data[1].rooms;
             bookingsData = data[2].bookings;
-            // bookingsRepo.bookARoom(room, newBooking)
             bookingsRepo = new BookingsRepo(bookingsData, roomsData)
             loadCustomer();
             filterRooms();
