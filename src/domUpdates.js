@@ -25,6 +25,13 @@ const roomTypeInput = document.querySelector('.room-type-selection');
 const signInErrorMessage = document.querySelector('.sign-in-error-message');
 const signInUserName = document.querySelector('#username');
 const signInPassword = document.querySelector('#password');
+const todaysDateDisplay = document.querySelector('.todays-date')
+const totalRoomsAvailableDisplay = document.querySelector('.number-of-rooms-available')
+const totalRevenueDisplay = document.querySelector('.total-revenue-today')
+const percentOccupiedDisplay = document.querySelector('.percent-occupied')
+const managerDateInput = document.querySelector('#managerDateSelection')
+const managerAvailbleRoomDisplay = document.querySelector('.manager-bookings')
+const managerCustomerDisplay = document.querySelector('.manager-customer-search-results')
 
 const determineBidetStatus = (bidetStatus) => {
   if (bidetStatus) {
@@ -164,8 +171,58 @@ let domUpdates = {
     signInErrorMessage.classList.add('collapsed');
   },
 
-  displayAvailableRoomsByType(roomList, roomType) {
+  displayTodaysDate(date) {
+    todaysDateDisplay.innerHTML = date
+  },
 
+  displayTotalRoomsAvailableToday(availableRoomListNumber) {
+    totalRoomsAvailableDisplay.innerHTML = availableRoomListNumber
+  },
+
+  displayTotalRevenueForToday(totalRevenue) {
+    totalRevenueDisplay.innerHTML = `$${totalRevenue}`
+  },
+
+  displayPercentRoomsOccupied(percentOccupied) {
+    percentOccupiedDisplay.innerHTML = `${percentOccupied * 100}%`
+  },
+
+  displayAllCustomers(customerList) {
+    if (customerList.length === 0) {
+      managerCustomerDisplay.innerHTML = '<p class="room-num">Something went wrong. We are unable to find any customers.</p>'
+    } else {
+      const displayCustomers = customerList.map((customer) => {
+        const customerPreview = `
+        <section class="customer-preview">
+        <div class="customer-info"><p class="room-num">${customer.name} - id: ${customer.id}</p></div>
+        <div class="customer-info"><p>Total Spent: $${customer.getTotalSpent()}</p></div>
+        </section>`
+        return customerPreview
+      }).join('')
+      managerCustomerDisplay.innerHTML = displayCustomers
+    }
+  },
+
+  managerDisplayAvailableRooms(roomList) {
+    if (roomList.length === 0) {
+      managerAvailbleRoomDisplay.innerHTML = '<p class="room-num">Nice! We are completely booked that day!</p>'
+    } else {
+      const displayAvailableRooms = roomList.map((eachRoom) => {
+        const bookingPreview = `
+        <section class="booking-preview">
+        <div class="room-info"><p class="room-num">Room ${eachRoom.number} - ${eachRoom.roomType}</p></div>
+        <div class="room-info"><p>${eachRoom.bedSize} (${eachRoom.numBeds}) - ${determineBidetStatus(eachRoom.bidet)}</p></div>
+        <div class="room-info"><p>$${eachRoom.costPerNight} /night</p></div>
+        <div class="room-info-btn"><button class="btn book-room-btn" id="${eachRoom.number}">Book</div>
+        </section>`
+        return bookingPreview
+      }).join('')
+      managerAvailbleRoomDisplay.innerHTML = displayAvailableRooms
+    }
+  },
+
+  managerSetCurrentDate(currentDate) {
+    managerDateInput.value = currentDate;
   }
 
 }

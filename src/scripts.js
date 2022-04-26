@@ -7,7 +7,6 @@ import './css/styles.css';
 import './images/overlook-icon-03.png'
 import domUpdates from "./domUpdates";
 import dayjs from 'dayjs';
-// import './images/OverLook_Logo-antler.svg';
 
 // GLOBAL VARIABLES
 let customersData;
@@ -36,7 +35,6 @@ const filterRoomsBtn = document.querySelector('.filter-room-button');
 const customerAvailableRoomsDisplay = document.querySelector('.customer-available-rooms')
 
 // FUNCTIONS
-
 fetchAllData().then((data) => {
   customersData = data[0].customers;
   roomsData = data[1].rooms;
@@ -48,10 +46,10 @@ const startOverlookApplication = () => {
   bookingsRepo = new BookingsRepo(bookingsData, roomsData);
   customerRepo = new CustomerRepo(customersData);
   // DELETE THIS LATER
-  currentCustomer = customerRepo.customerList[0]
-  domUpdates.goToCustomerBookingsView();
-  loadCustomer();
-  loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  // currentCustomer = customerRepo.customerList[0]
+  // domUpdates.goToCustomerBookingsView();
+  // loadCustomer();
+  // loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
   // DELETE THIS LATER
 }
 
@@ -71,15 +69,15 @@ const checkSignInCredentials = () => {
     getCustomer(idInput);
     domUpdates.goToCustomerBookingsView();
     loadCustomer();
-    loadAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+    loadAvailableRooms();
     domUpdates.removeSignInError();
   } else if (userNameInput === 'manager' && userPasswordInput === 'overlook2021') {
     domUpdates.goToManagerDashboardView();
     loadManager();
+    managerLoadAvailableRooms();
     domUpdates.removeSignInError();
   } else {
     domUpdates.displaySignInError();
-    console.log('nope');
   }
 }
 
@@ -99,9 +97,15 @@ const loadCustomer = () => {
   domUpdates.displayCustomerTotalSpent(currentCustomer.totalSpent);
 }
 
-const loadAvailableRooms = (roomList) => {
-  domUpdates.displayAvailableRooms(roomList);
-  domUpdates.setCurrentDate(dayjs().format('YYYY-MM-DD'))
+const loadAvailableRooms = () => {
+  domUpdates.displayAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  domUpdates.setCurrentDate(dayjs().format('YYYY-MM-DD'));
+}
+
+const managerLoadAvailableRooms = () => {
+  domUpdates.displayAllCustomers(customerRepo.customerList);
+  domUpdates.managerDisplayAvailableRooms(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')));
+  domUpdates.managerSetCurrentDate(dayjs().format('YYYY-MM-DD'));
 }
 
 const filterRooms = () => {
@@ -116,7 +120,6 @@ const filterRooms = () => {
 
 const createBookingInfo = (roomInfo) => {
   return {
-    // id: `overlook${Date.now()}`,
     userID: currentCustomer.id, 
     date: dayjs(dateInput.value).format('YYYY/MM/DD'),
     roomNumber: roomInfo.number
@@ -124,11 +127,17 @@ const createBookingInfo = (roomInfo) => {
 }
 
 const loadManager = () => {
-
+  domUpdates.displayTodaysDate(dayjs().format('MMMM D, YYYY'));
+  domUpdates.displayTotalRoomsAvailableToday(bookingsRepo.getAvailableRooms(dayjs().format('YYYY/MM/DD')).length);
+  const getTotalCost = bookingsRepo.getBookedRooms(dayjs().format('YYYY/MM/DD')).reduce((total, booking) => {
+    total += booking.costPerNight;
+    return total;
+  }, 0).toFixed(2)
+  domUpdates.displayTotalRevenueForToday(getTotalCost);
+  domUpdates.displayPercentRoomsOccupied(((bookingsRepo.getBookedRooms(dayjs().format('YYYY/MM/DD')).length)/25).toFixed(4));
 }
 
 // EVENTLISTENERS
-
 signInBtn.addEventListener('click', checkSignInCredentials);
 signOutBtn.addEventListener('click', domUpdates.goToSignInView);
 customerBookingsNavBtn.addEventListener('click', domUpdates.goToCustomerBookingsView);
@@ -136,7 +145,6 @@ customerBookRoomNavBtn.addEventListener('click', domUpdates.goToCustomerBookRoom
 managerDashboardNavBtn.addEventListener('click', domUpdates.goToManagerDashboardView);
 managerBookingsNavBtn.addEventListener('click', domUpdates.goToManagerBookingsView);
 filterRoomsBtn.addEventListener('click', filterRooms);
-
 
 customerAvailableRoomsDisplay.addEventListener('click', function(event) {
   if (event.target.classList[1] === 'book-room-btn') {
@@ -149,10 +157,8 @@ customerAvailableRoomsDisplay.addEventListener('click', function(event) {
             customersData = data[0].customers;
             roomsData = data[1].rooms;
             bookingsData = data[2].bookings;
-
             // bookingsRepo.bookARoom(room, newBooking)
             bookingsRepo = new BookingsRepo(bookingsData, roomsData)
-
             loadCustomer();
             filterRooms();
           })
