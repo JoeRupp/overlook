@@ -1,7 +1,7 @@
 # OverLook Hotel 🏔
 
 ### Overview:
-The OverLook Hotel is a solo Front-End project from the Mod 2 curriculum at Turing School of Software & Design. Students were tasked to build a hotel management application in seven days for hotel customers and staff to manage room bookings and calculate customer bills. Upon starting, the application needs to fetch customer data, room data, bookings data, and display a log in screen for customers and management. Logging into the application using the correct credentials will load the customer/management dashboard, where the user can view past bookings, see total cost, book rooms, etc.
+The OverLook Hotel is a solo Front-end project from the Mod 2 curriculum at Turing School of Software & Design. This project's goal was to build a hotel management application in seven days for hotel customers and staff to manage room bookings and calculate customer bills. Upon starting the application, a  log in screen for customers and management will be displayed, while a series of requests will happen in the background to gather necessary data. Logging into the application using the correct credentials will load the customer/management dashboard, where the user can view past bookings, see total cost, book rooms, etc.
 
 ![sign in preview](https://media.giphy.com/media/4IvFOpUWMgmPrsXBp9/giphy.gif)
 ![user dashboard](https://media.giphy.com/media/znYuBx2qBhZ8CuXxIX/giphy.gif)
